@@ -6,11 +6,143 @@
 <section id="features" class="section" style="background:#fff"><div class="wrap"><div class="section-title"><small>核心能力</small><h2>资源能抵达，教学能适配，经验能延续</h2></div><div class="features"><article class="card"><b>✨ AI乡土化备课</b><h3>从真实生活生成课堂</h3><p>把教材知识与当地农作物、集市和水资源结合，快速生成可由教师审核的教案。</p></article><article class="card"><b>💬 启发式学习辅导</b><h3>找到不会的那一步</h3><p>不直接给最终答案，通过逐级提示和相似例题帮助学生真正理解。</p></article><article class="card"><b>📚 支教教学交接</b><h3>让经验留在课堂</h3><p>记录已教内容、班级薄弱点与有效方法，帮助下一批志愿者继续教学。</p></article></div></div></section>
 <section id="courses" class="section"><div class="wrap"><div class="section-title"><small>三下乡科普资源库</small><h2>8门原创科普课程</h2><p>点击课程卡片查看课程内容</p></div><div id="courseGrid" class="courses"></div></div></section>
 <section id="demo" class="section demo"><div class="wrap"><div class="section-title"><small>可交互产品原型</small><h2>一条完整的支教教学闭环</h2></div><div class="tabs"><button class="active" data-tab="teacher">✨ <span>教师备课</span></button><button data-tab="student">👦 <span>学生学习</span></button><button data-tab="handoff">📋 <span>教学交接</span></button></div><div class="panel"><div id="teacher" class="tabview flow"><div class="box"><h3>创建一节新课程</h3><label class="field">课程主题<input value="小数的加减法"></label><label class="field">当地生活素材<input value="村口集市、水稻收成"></label><button id="generate" class="wide">生成乡土化教案</button></div><div class="box"><div id="waiting"><h3>等待生成课程</h3><p>点击左侧按钮，查看AI如何把教材知识与乡村真实生活连接起来。</p></div><div id="lessonResult" class="result"><span class="badge">AI已生成 · 待教师审核</span><h3>在村口集市学小数加减法</h3><div class="step"><span class="num">1</span>情境导入：展示集市价格牌，引导学生提出问题。</div><div class="step"><span class="num">2</span>合作探究：用水稻收成记录练习小数点对齐。</div><div class="step"><span class="num">3</span>分层练习：设计一份不超过20元的采购清单。</div><button id="publish" class="wide" style="background:#1f785e">审核并同步至学生端</button></div></div></div><div id="student" class="tabview hidden chat"><h2>AI不替你答题，陪你找到下一步</h2><div id="studentWait" class="notice">等待教师发布新任务，请先完成教师端操作。</div><div id="studentTask" class="hidden"><div class="notice">李老师发布了新任务 · 刚刚同步</div><div class="bubble">别急着算，我们先找出题目中的两个价格。你看到了哪两个数？</div><div id="chatMore"></div><button id="hint" class="wide" style="background:#397da4">查看下一步引导</button></div><div id="aiAsk" style="background:#fff;border:1px solid #d9e2dc;border-radius:18px;margin-top:16px;padding:16px;text-align:left"><h3 style="margin:0 0 10px;color:#173b32;font-size:16px">向青野AI提问</h3><div id="aiChat" style="max-height:260px;overflow-y:auto;margin-bottom:10px"></div><div style="display:flex;gap:8px"><input id="aiInput" placeholder="输入你的问题，按 Enter 发送…" style="flex:1;min-width:0;padding:12px;border:1px solid #d9e2dc;border-radius:12px;background:#f7f9f6;color:#173b32"><button id="aiSend" class="wide" style="flex:0 0 auto;width:auto;padding:0 20px;background:#e37342">发送</button></div><p style="font-size:11px;color:#8a9993;margin:8px 0 0">请勿输入姓名、电话、住址等个人信息 · DeepSeek 驱动</p></div></div><div id="handoff" class="tabview hidden"><h2>四年级一班 · 支教交接档案</h2><div class="metrics"><div class="card"><b style="font-size:28px">12</b><p>已完成课时</p></div><div class="card"><b style="font-size:28px">76%</b><p>知识掌握率</p></div><div class="card"><b style="font-size:28px">3项</b><p>待跟进薄弱点</p></div></div><div class="notice"><b>给下一位老师的建议：</b>学生对“村口集市”情境参与度很高，建议继续使用价格牌开展小数练习。</div></div></div></div></section></main><footer class="footer">© 2026 青野智教 · ICAN智能教育赛道参赛作品</footer>
-<div id="modal" class="modal"><div class="modal-card"><button class="close" onclick="closeModal()">×</button><img id="modalImg"><span id="modalBadge" class="badge"></span><h2 id="modalTitle"></h2><p id="modalSummary" class="lead" style="font-size:15px"></p><h3>课程学习目标</h3><ul id="modalGoals"></ul><div class="notice">本课程内容来源于团队三下乡科普课件，适合支教课堂使用。</div></div></div>
+<div id="modal" class="modal"><div class="modal-card"><button class="close" onclick="closeModal()">×</button><img id="modalImg"><span id="modalBadge" class="badge"></span><h2 id="modalTitle"></h2><p id="modalSummary" class="lead" style="font-size:15px"></p><h3>课程学习目标</h3><ul id="modalGoals"></ul><h3 id="knowledgeTitle" style="margin-top:22px">课程知识要点</h3><div id="modalSections"></div><h3 style="margin-top:22px">趣味问答 <span id="quizProgress" style="font-size:13px;color:var(--muted);font-weight:400"></span></h3><div id="quizArea"></div><div class="notice">本课程内容来源于团队三下乡科普课件，适合支教课堂使用。</div></div></div></div>
 <script>
-const courses=[['人工智能科普','人工智能','ai.png','从身边的AI助手出发，认识人工智能的发展、生成原理与负责任的使用方式。',['理解人工智能的基本概念','发现生活与校园中的AI应用','学会检查和验证AI输出']],['芯片与电路','信息科技','chips.png','把芯片比作一座微型城市，探索晶体管、二进制与芯片制造。',['认识芯片的作用','理解晶体管与二进制','了解从沙子到芯片的过程']],['数据结构与算法','信息科技','algorithms.png','借助箱子、排队和羽毛球桶，理解数组、队列、栈与排序。',['认识常见数据结构','理解先进先出与后进先出','体验冒泡排序']],['无人机与机器人','智能工程','robots.png','认识机器人、无人机的组成与它们在水利生态中的应用。',['区分机器人类型','认识传感与控制系统','了解智慧水利应用']],['魔法物理小实验','基础科学','physics.png','用身边材料探索力、声音、光、热、电磁与简单机械。',['发现生活中的物理','用实验验证猜想','培养动手创新能力']],['电流的奇妙冒险','电子工程','circuits.png','从生活用电到数字信号，认识呼吸灯与流水灯的原理。',['区分电能与电信号','理解高低电平','认识基础逻辑电路']],['神奇的量子世界','前沿科学','quantum.png','从经典物理走向微观世界，理解质疑与探索的科学精神。',['比较经典与量子视角','认识不确定性','保持科学好奇心']],['节约用水','生态教育','water.png','从生活环节学习可实践的节水方法，成为节水宣传员。',['认识水资源价值','掌握家庭节水方法','设计节水行动']]];
+const courses=[
+{name:'人工智能科普',cat:'人工智能',img:'ai.png',summary:'从身边的AI助手出发，认识人工智能的发展、生成原理与负责任的使用方式。',goals:['理解人工智能的基本概念与发展历程','发现生活与校园中的AI应用','掌握正确使用AI的方法：详细指令+检查验证'],
+sections:[
+{title:'什么是人工智能',points:['人工智能（AI）是研究、开发用于模拟、延伸和扩展人的智能的技术科学','具备三大能力：自主学习与适应、高效数据处理、基于知识的决策推理','1956年达特茅斯会议正式提出"人工智能"概念，标志学科诞生','经历了黄金期、低谷期、专家系统时代，如今在大数据与算力提升下迎来新春天']},
+{title:'生活中的AI',points:['AI助手：豆包、DeepSeek、文心一言等便捷生活与学习','自动驾驶：用机器学习处理路况、做出实时决策','智能家居：根据用户习惯自动调整设置','人脸识别：用于手机解锁、交易支付等场景']},
+{title:'AI生成内容的四步走',points:['①解析问题：分词、识别关键词、明确约束条件','②知识库检索：从海量文本数据中搜索相关信息','③机器学习优化：筛选、重组信息，贴合用户需求','④输出结果：格式整理、语法检查，呈现最终内容']},
+{title:'正确使用AI',points:['AI是工具，不是万能的，它不具备人的情感和真正的创造力','下达越详细的指令，AI生成结果越准确','AI可能出错，必须认真检查和验证输出','善用AI的输出学习逻辑，提升自己的能力']}
+],
+quiz:[
+{q:'人工智能学科正式诞生于哪一年？',options:['1950年','1956年','1969年','1980年'],answer:1,explain:'1956年达特茅斯会议正式提出"人工智能"概念，标志着AI学科诞生。'},
+{q:'AI生成内容的第一步是什么？',options:['直接输出结果','解析问题（分词、识别关键词）','机器学习优化','知识库检索'],answer:1,explain:'AI首先解析问题，识别关键词和约束条件，然后才检索知识、优化并输出。'},
+{q:'以下哪种做法是正确使用AI？',options:['完全相信AI的输出','下达详细指令并检查验证结果','用AI代替所有思考','把个人隐私信息随便发给AI'],answer:1,explain:'正确使用AI：指令越详细越好，同时必须检查验证AI的输出，因为AI可能出错。'},
+{q:'豆包、DeepSeek属于哪类AI应用？',options:['自动驾驶','AI助手','人脸识别','智能家居'],answer:1,explain:'豆包、DeepSeek等都是AI助手，可以通过对话帮助我们解答问题、创作内容。'}
+]},
+{name:'芯片与电路',cat:'信息科技',img:'chips.png',summary:'把芯片比作一座微型城市，探索晶体管、二进制与芯片制造的奥秘。',goals:['认识芯片的作用与地位','理解晶体管、二进制与电路闭合回路','了解从沙子到芯片的制造过程'],
+sections:[
+{title:'身边的"大脑"',points:['手机、游戏机、无人机里都有一个共同的"大脑"——芯片','芯片比指甲盖还小，却集成了数十亿个晶体管','被誉为"工业粮食"，是现代科技的基石','芯片决定了电子设备的性能上限']},
+{title:'电路基础',points:['电路必须是闭合回路，断开一点电流就会停止','电池=加油站（提供能量），导线=马路，开关=红绿灯，灯泡=终点站','可以用"人肉电路"实验：同学们手拉手形成回路，松手就断电']},
+{title:'晶体管与二进制',points:['芯片内部藏着数亿个微型开关——晶体管','"开"代表1，"关"代表0，这就是芯片的语言','所有文字、图像、声音都靠0和1组合存储和传输','芯片每秒能切换几十亿次开关，算得比闪电还快']},
+{title:'从30吨到指甲盖',points:['最早的电脑ENIAC重30吨、占满一间教室','发展历程：真空管→晶体管→集成电路→微处理器→纳米制程','集成电路把整座电子城市压缩进一块小小的"银色饼干"','一根头发丝能并排站下约六万个晶体管']},
+{title:'芯片是怎样造成的',points:['原料是沙子（二氧化硅），高温提纯成99.9999%以上的纯硅','纯硅拉成硅棒，切成薄片叫"晶圆"（像披萨饼底）','用极紫外光当"刻刀"，在晶圆上雕刻纳米级电路','在无尘车间（穿"兔子服"）工作，一粒灰尘等于一座大山','晶圆切割成小方块，穿上黑色"盔甲"，就是我们看到的芯片']},
+{title:'中国芯',points:['航天、高铁等领域已有自主芯片稳定运行','光刻机等核心设备是制造顶尖芯片的关键挑战','未来芯片可能向AI专用、量子计算等方向演进']}
+],
+quiz:[
+{q:'电路中，电池相当于什么？',options:['马路','加油站','红绿灯','终点站'],answer:1,explain:'电池为电路提供能量，就像加油站为汽车提供燃料；导线是马路，开关是红绿灯。'},
+{q:'芯片用什么"语言"说话？',options:['中文','英文','二进制（0和1）','摩斯电码'],answer:2,explain:'芯片用晶体管的"开"和"关"表示1和0，所有信息都由二进制编码。'},
+{q:'制造芯片的主要原材料来自哪里？',options:['石油','沙子','树木','铁矿石'],answer:1,explain:'芯片的主要材料是硅，而沙子的主要成分是二氧化硅，经过提纯后变成制造芯片的硅晶圆。'},
+{q:'世界上第一台电子计算机ENIAC大约有多重？',options:['3吨','30吨','300吨','3000吨'],answer:1,explain:'ENIAC重达30吨，占满一整间教室，却不如今天的手机聪明，体现了芯片微型化的巨大进步。'}
+]},
+{name:'数据结构与算法',cat:'信息科技',img:'algorithms.png',summary:'借助箱子、排队和羽毛球桶，理解数组、队列、栈与排序算法。',goals:['认识数组、链表、队列、栈四种基本数据结构','理解顺序查找与二分查找的区别','体验选择排序和冒泡排序的过程'],
+sections:[
+{title:'数组',points:['一组连续排列、带编号的箱子，可以按序号快速取东西','有一维、二维、多维之分（成绩单、扫雷游戏都是二维数组）','缺点：增加或删除元素时，其他元素几乎都要移动，很麻烦']},
+{title:'链表',points:['一排箱子用"箭头"连接，不需要连续存放','像火车厢一样用链条链接，随时可以添加和删除','每个箱子指向下一个箱子的位置']},
+{title:'队列',points:['先进先出（FIFO），就像排队打饭','队尾入队，队首出队','生活中的银行叫号系统就是典型的队列应用','约瑟夫问题：n个人围成一圈报数，报到k的人出局']},
+{title:'栈',points:['后进先出（LIFO），像羽毛球桶只从开口处放取','栈顶是操作端，栈底是另一端','生活例子：弹匣装弹、消毒柜餐盘存放、点击"撤销"按钮','1、2、3、4按顺序入栈，出栈顺序一定是4、3、2、1']},
+{title:'迭代算法',points:['重复执行一组指令，从原值推出新值，逼近目标','典型例子：斐波那契数列 1,1,2,3,5,8...','三要素：确定迭代变量、建立迭代关系式、控制迭代结束']},
+{title:'查找算法',points:['顺序查找：从第一个开始逐个比较，数据可以乱序，效率O(n)','二分查找：数据必须有序，每次与中间元素比较，砍掉一半范围','猜数字游戏（100以内，10次必中）就是二分查找思想','理想情况比较1次，最差情况比较n次，平均(n+1)/2次']},
+{title:'排序算法',points:['选择排序：每遍找出最小（大）的数，放到待排序区间最前面；共需n-1遍','冒泡排序：相邻两个数比较交换，大的数像气泡一样"沉"到后面','每一遍加工后，都有一个数的位置被确定']}
+],
+quiz:[
+{q:'队列的特点是什么？',options:['后进先出','先进先出','随机进出','只进不出'],answer:1,explain:'队列是先进先出（FIFO），就像排队打饭，先来的先打到饭。'},
+{q:'以下哪个是栈（后进先出）的生活例子？',options:['排队打饭','银行叫号','羽毛球桶取球','公交车前门上后门下'],answer:2,explain:'羽毛球桶只能从开口处放取，最后放进去的球最先被取出，是典型的栈结构。'},
+{q:'使用二分查找的前提条件是什么？',options:['数据量很大','数据必须有序','数据都是数字','数据不能重复'],answer:1,explain:'二分查找每次与中间元素比较来缩小范围，要求数据必须是有序排列的。'},
+{q:'冒泡排序中，每一轮比较交换后，最大的数会怎样？',options:['被删除','沉到最后面','跑到最前面','保持原位'],answer:1,explain:'冒泡排序中，相邻两数比较，较大的数不断向后交换，每轮结束后最大的数"沉"到末尾。'}
+]},
+{name:'无人机与机器人',cat:'智能工程',img:'robots.png',summary:'认识机器人、无人机的组成与它们在水利生态中的应用。',goals:['区分机器人类型并了解基本构成','认识无人机的结构与应用领域','了解无人机和水下机器人在水利中的应用'],
+sections:[
+{title:'机器人分类',points:['工业机器人：用于制造业，执行重复性高、精度要求高的任务','服务机器人：用于非制造业，帮助人们完成服务性工作','特种机器人：用于军事、侦查、救援等特定专业领域']},
+{title:'机器人的构成',points:['动力系统：负责机器人的运动和操作','传感器系统：陀螺仪、加速度计获取运动状态','控制系统：PID算法最为常用，实现指令与安全保护','外壳包装：保护内部设备']},
+{title:'无人机结构',points:['机身：基础结构，影响飞行性能与续航','飞控系统：接收传感器数据，维持无人机稳定','动力遥控系统：提供动力并接收控制指令','通讯链路：用于无人机与地面控制之间的信息传递']},
+{title:'无人机的应用',points:['航拍摄影：电影制作、广告、新闻报道','环境监测：空气质量、水质、植被监测','农业植保：大面积农田喷洒农药、播撒种子、施肥','灾难救援：快速到达灾区，提供实时航拍图像']},
+{title:'水利中的应用',points:['水质检测：搭载多光谱成像仪、水质采样仪全方位巡查','防汛减灾：实时传递灾情影像，为指挥中心提供决策依据','智能巡检：河湖全覆盖巡查飞行，大大提高效率','水下机器人：安全性高、操作简便，用于大坝检测、水库搜查、水下巡查']},
+{title:'南水北调与水资源',points:['中国水资源总量约2.8万亿立方米，居世界第六','但人均仅约2000立方米，不足世界平均1/3，南多北少','东线：扬州→黄淮海平原（利用京杭大运河）','中线：丹江口水库→北京、天津（穿过黄河，自流北上）','西线：长江上游→黄河上游（穿巴颜喀拉山输水隧洞）']}
+],
+quiz:[
+{q:'机器人中的陀螺仪和加速度计属于哪个系统？',options:['动力系统','传感器系统','控制系统','外壳包装'],answer:1,explain:'陀螺仪和加速度计用来获取机器人的运动状态，属于传感器系统。'},
+{q:'无人机在农业中的主要用途不包括以下哪项？',options:['喷洒农药','播撒种子','收割庄稼','施肥'],answer:2,explain:'无人机可用于喷药、播种、施肥，但收割庄稼通常需要专门的收割机，不是无人机的常规用途。'},
+{q:'南水北调中线工程的起点是哪里？',options:['扬州','丹江口水库','通天河','北京'],answer:1,explain:'中线工程从丹江口水库引水，穿过黄河，沿京广铁路西侧自流向北京、天津供水。'},
+{q:'水下机器人在水利工程中最突出的优点是什么？',options:['速度极快','安全性高，可检测大坝水下等危险区域','价格非常便宜','不需要电力'],answer:1,explain:'水下机器人安全性高、操作简便，能完成大坝检测、水库搜查、水下巡查等人工作业危险的任务。'}
+]},
+{name:'魔法物理小实验',cat:'基础科学',img:'physics.png',summary:'用身边材料探索力、声音、光、热、电磁与简单机械。',goals:['发现生活中的物理现象','用实验验证猜想，培养动手能力','理解力、声、光、热、电磁的基本原理'],
+sections:[
+{title:'静电小魔术',points:['塑料梳子摩擦头发后靠近小纸片，纸片会"跳舞"','摩擦使电子"搬家"：梳子带负电，头发带正电，异性相吸','脱毛衣的噼啪声、车门把手的小火花都是静电']},
+{title:'力与运动',points:['力是看不见的大手：推力让球滚出去，拉力把门打开','摩擦力：鞋底花纹增大摩擦防滑，滴油减小摩擦让门轴顺滑','惯性：公交启动人后仰，刹车人前倾——物体"懒得"改变状态','重力：地球像大磁铁把万物往下拉，月球重力小所以宇航员跳得高']},
+{title:'声音魔法',points:['声音来自物体振动：敲鼓鼓面跳，说话声带振','声音需要介质传播：钢铁中约5000m/s > 水中1500 > 空气中340','真空里声音传不了（闹钟放真空罩里变轻）','音调由振动快慢决定，响度由振动幅度决定']},
+{title:'光与影',points:['光沿直线传播，物体挡住光就形成影子','镜子反射光：平面镜对称成像，凹面镜聚光可点燃火柴，凸面镜广角（汽车后视镜）','彩虹：白光藏着红橙黄绿蓝靛紫，水滴像三棱镜把光拆开']},
+{title:'热与能量',points:['热从高温流向低温：金属勺导热快烫手，木头筷导热慢','热胀冷缩：铁轨留缝隙、瘪乒乓球放热水里恢复原状','能量守恒：滑滑梯时势能→动能→热能，能量不会凭空消失']},
+{title:'电与磁',points:['闭合回路才有电流：电源、导线、用电器、开关缺一不可','磁铁有N极和S极：异极相吸，同极相斥','电磁铁：通电线圈产生磁性，断电消失；增加线圈或电流磁性变强','电磁起重机、门铃、磁悬浮列车都用了电磁铁']},
+{title:'流体与简单机械',points:['大气压：吸管喝饮料、吸盘挂钩都是大气压在帮忙','伯努利原理：流速越快压强越小——向两张纸中间吹气纸会靠拢，飞机机翼靠它产生升力','浮力：盐水密度大浮力大，鸡蛋在盐水中漂浮','杠杆：跷跷板、剪刀、开瓶器——找对支点小力赢大力','滑轮：定滑轮改方向，动滑轮省一半力','斜面：盘山公路、螺丝螺纹——拉长坡度省力气']}
+],
+quiz:[
+{q:'梳子摩擦头发后能吸引小纸片，这是什么现象？',options:['磁力','静电','重力','浮力'],answer:1,explain:'摩擦使电子转移，梳子带上静电，产生电场吸引轻小的纸片。'},
+{q:'声音在以下哪种介质中传播速度最快？',options:['空气','水','钢铁','真空'],answer:2,explain:'声音在钢铁中约5000m/s，水中约1500m/s，空气中约340m/s，真空中不能传播。'},
+{q:'飞机机翼产生升力主要利用了什么原理？',options:['浮力','伯努利原理（流速快压强小）','重力','热胀冷缩'],answer:1,explain:'机翼上方弧形空气流速快、压强小，下方流速慢、压强大，产生向上的升力。'},
+{q:'瘪了的乒乓球放进热水里会恢复原状，原因是？',options:['水的压力把它压圆','球内空气受热膨胀','热水有修复功能','球壳受热变软'],answer:1,explain:'球内空气受热膨胀，把瘪下去的部分顶起来，这是热胀冷缩原理。'}
+]},
+{name:'电流的奇妙冒险',cat:'电子工程',img:'circuits.png',summary:'从生活用电到数字信号，认识呼吸灯与流水灯的电路原理。',goals:['区分电能与电信号，理解高低电平','认识电容、NE555、CD4017等元件','了解呼吸灯和流水灯的制作原理'],
+sections:[
+{title:'电的两大本领',points:['传递能量：让灯发光、马达转动、水变热——这叫"用电能"','传递信息：遥控器、手机、广播用变化的电传递信息——这叫"电信号"','电的本质是电子在导体中快速定向移动形成电流']},
+{title:'数字信号：0和1',points:['高电平=有电=1，就像灯亮了、在说"我在"','低电平=没电=0，就像灯灭了、在说"我不在"','0和1交替变化就是数字信号，像手电筒闪一下=1不闪=0']},
+{title:'电容：储电小仓库',points:['电容像微型充电电池，能储存电荷再慢慢放出','充电：接上电源，正负极板积累电荷','放电：断开电源，储存的电荷驱动其他元件','电容越大，充放电越慢；电容越小，充放电越快']},
+{title:'NE555芯片：电子界的节拍器',points:['NE555能产生"嘀嗒嘀嗒"不断变化的方波信号','配合电阻和电容，自动充放电形成循环','电容电压升到电源2/3时输出变0（灯灭），降到1/3时输出变1（灯亮）','改变电阻或电容就能改变信号快慢']},
+{title:'CD4017芯片：轮流亮灯魔法师',points:['十进制计数器，每来一个脉冲就让下一个输出脚变高电平','Q0~Q9共10个输出脚，依次轮流点亮LED','NE555负责"打节拍"，CD4017负责"按节拍轮流亮灯"','数到Q9后自动从Q0重新开始']},
+{title:'呼吸灯与流水灯',points:['呼吸灯：NE555控制一颗LED亮度渐变，充电变亮、放电变暗，像在呼吸','流水灯：NE555+CD4017控制10颗LED依次点亮，像水流一样流动','改变电阻R和电容C就能控制呼吸或流动的速度']}
+],
+quiz:[
+{q:'电的两大本领是传递能量和什么？',options:['传递热量','传递信息','传递光','传递声音'],answer:1,explain:'电既能传递能量（灯亮、马达转），也能传递信息（遥控器、手机的电信号）。'},
+{q:'在数字信号中，高电平代表什么？',options:['0','1','不确定','故障'],answer:1,explain:'高电平=有电=1，低电平=没电=0，用0和1的组合传递数字信息。'},
+{q:'NE555芯片最常用的功能是什么？',options:['储存数据','产生方波信号（像节拍器）','发光','放大声音'],answer:1,explain:'NE555通过电容充放电自动产生不断变化的方波信号，被称为电子界的节拍器。'},
+{q:'如果把流水灯电路中的电容换得更大，灯会怎样？',options:['流动更快','流动更慢','停止流动','亮度变高'],answer:1,explain:'电容越大充放电越慢，NE555产生的节拍就越慢，流水灯流动速度也会变慢。'}
+]},
+{name:'神奇的量子世界',cat:'前沿科学',img:'quantum.png',summary:'从经典物理走向微观世界，理解不确定性与科学探索精神。',goals:['了解经典物理的决定论与拉普拉斯妖','理解测不准原理和波粒二象性','思考量子力学对世界观的意义'],
+sections:[
+{title:'经典物理的辉煌',points:['牛顿创立经典物理学，用公式解释从天体到日常的宏观现象','拉普拉斯妖设想：如果有个"妖"知晓所有粒子的位置和动量，就能推算宇宙的过去和未来','这就是"决定论"——世界是确定的，一切都是宿命','勒维耶用计算预测海王星位置，哈雷预测彗星回归——科学史上"最狂妄"的时代']},
+{title:'量子力学的挑战',points:['波尔发现电子会从一条轨道"跳跃"到另一条，无法用经典物理解释','电子的"跃迁"现象让传统连续的物理观念受到根本挑战','微观世界的行为让整个物理学界陷入混乱']},
+{title:'测不准原理',points:['海森堡提出：无法同时精确知道一个粒子的位置和速度','测量本身就会影响粒子的状态','这意味着"拉普拉斯妖"彻底失明了，宿命论被打破','未来不是确定的，而是一团由可能性构成的概率云']},
+{title:'波粒二象性',points:['双缝干涉实验：光既像粒子形成一个个亮点，又像波产生干涉条纹','电子、原子等微观粒子也表现出波粒二象性','这种特性无法用经典观念理解']},
+{title:'薛定谔的猫',points:['思想实验：盒子里的猫在被观测前，处于"既死又活"的叠加状态','为解释这种荒谬，有人提出"多元世界理论"——每次观测世界分裂成多个平行宇宙','这个实验把量子世界的诡异推向了宏观层面']},
+{title:'不确定性的意义',points:['量子力学"烧毁"了宇宙的确定剧本，赋予世界无限可能性','未来是开放的，人类拥有真正的选择和创造的自由','科学的魅力在于不断质疑、探索和前进','量子力学是当前最好的理论，但是否是终极真理仍未知']}
+],
+quiz:[
+{q:'"拉普拉斯妖"的设想体现了经典物理的什么观点？',options:['世界是不确定的','决定论（一切都可预测）','世界是随机的','人类无法认识世界'],answer:1,explain:'拉普拉斯妖认为只要知晓所有粒子状态就能推算过去未来，体现了经典物理的决定论/宿命论。'},
+{q:'测不准原理是由谁提出的？',options:['牛顿','爱因斯坦','海森堡','薛定谔'],answer:2,explain:'海森堡提出测不准原理：无法同时精确知道粒子的位置和速度，测量本身会影响状态。'},
+{q:'光的双缝干涉实验揭示了光的什么特性？',options:['只有粒子性','只有波动性','波粒二象性','不传播'],answer:2,explain:'双缝实验中光既形成粒子般的亮点，又产生波般的干涉条纹，说明光具有波粒二象性。'},
+{q:'薛定谔的猫在盒子被打开观测前处于什么状态？',options:['一定活着','一定死了','既死又活的叠加态','睡着了'],answer:2,explain:'根据量子力学，观测前猫处于生与死的叠加状态，只有打开盒子观测才会"坍缩"到确定状态。'}
+]},
+{name:'节约用水',cat:'生态教育',img:'water.png',summary:'从生活各环节学习可实践的节水方法，成为节水宣传员。',goals:['了解中国水资源短缺的现状','掌握家庭和校园的具体节水方法','养成一水多用、随手关水的习惯'],
+sections:[
+{title:'中国有多缺水',points:['地球表面70%被水覆盖，但可利用的淡水资源有限','中国人均水资源约2220立方米，仅为世界平均水平的1/4，列全球第88位','全国400多座城市供水不足，110座严重缺水','32个百万人口以上特大城市中，30个长期受缺水困扰','北京、天津、青岛、大连等城市缺水最为严重']},
+{title:'洗衣节水',points:['衣服尽量集中一起洗，不要一件件分开洗','小件少量衣物提倡手洗','洗衣机洗少量衣服时水位太高，既洗不干净又浪费水','将漂洗的水留作下一批洗涤用水，一次可省30-40升']},
+{title:'洗澡节水',points:['淋浴比盆浴更省水','不要让水自始至终开着，先淋湿再涂肥皂，最后一次冲洗','选用低流量莲蓬头，学会调节冷热水比例','多人排队依次淋浴，可节省热水流出前的冷水流失']},
+{title:'马桶与一水多用',points:['水箱里放一块砖头或装满水的可乐瓶，减少每次冲水量','洗菜水、洗衣水、洗澡水可用来浇花、洗车、冲马桶','淘米水、煮面水可洗碗筷，去油又节水','养鱼的水用来浇花，还能促进花木生长']},
+{title:'生活细节节水',points:['洗菜用盆接水洗，不要开着水龙头冲','刷牙用口杯接水，勤开勤关龙头','擦地用节水型拖把，不用流水冲','洗脸用脸盆，不用流水','发现水龙头漏水及时更换橡皮垫圈']},
+{title:'节水公益广告语',points:['"别让你的眼泪成为地球上最后一滴水"','"惜水、爱水、节水，从我做起"','"一人节水一小步，人人节水一大步"','"不要等水源干枯了，才知道珍贵"']}
+],
+quiz:[
+{q:'中国人均水资源量约为世界平均水平的多少？',options:['二分之一','三分之一','四分之一','十分之一'],answer:2,explain:'中国人均水资源约2220立方米，仅为世界平均水平的1/4，属于缺水国家。'},
+{q:'以下哪种做法最浪费水？',options:['洗菜用盆接水洗','刷牙时一直开着水龙头','用洗菜水浇花','集中衣物一起洗'],answer:1,explain:'刷牙时一直开着水龙头会让水白白流走，应该用口杯接水、随手关龙头。'},
+{q:'在马桶水箱里放一个装满水的可乐瓶，目的是什么？',options:['装饰水箱','减少每次冲水量','清洁马桶','增加水压'],answer:1,explain:'可乐瓶占了水箱的一部分空间，减少了储水量，从而减少每次冲水的用水量。'},
+{q:'"别让你的眼泪成为地球上最后一滴水"想告诉我们什么？',options:['眼泪很珍贵','要节约用水，否则未来可能无水可用','眼泪可以喝','不要轻易流泪'],answer:1,explain:'这句广告语用夸张的方式提醒我们：如果不节约用水，地球上最后一滴水可能就是人类的眼泪。'}
+]}
+];
 const grid=document.querySelector('#courseGrid');courses.forEach((c,i)=>{grid.innerHTML+=`<article class="card course"><button onclick="openCourse(${i})"><img src="${c[2]}" alt="${c[0]}"><div class="course-body"><span class="badge">${c[1]}</span><h3>${c[0]}</h3><p>${c[3]}</p><b class="orange">查看课程 →</b></div></button></article>`});
-function openCourse(i){let c=courses[i];modalImg.src=c[2];modalBadge.textContent=c[1];modalTitle.textContent=c[0];modalSummary.textContent=c[3];modalGoals.innerHTML=c[4].map(x=>'<li>'+x+'</li>').join('');modal.classList.add('open')}function closeModal(){modal.classList.remove('open')}modal.onclick=e=>{if(e.target===modal)closeModal()};
+function openCourse(i){let c=courses[i];modalImg.src=c.img;modalBadge.textContent=c.cat;modalTitle.textContent=c.name;modalSummary.textContent=c.summary;modalGoals.innerHTML=c.goals.map(x=>'<li>'+x+'</li>').join('');modalSections.innerHTML=c.sections.map(s=>'<div style="margin:10px 0;padding:12px 14px;background:#f4f8f5;border-radius:12px"><b style="color:var(--mid)">'+s.title+'</b><ul style="margin:6px 0 0;padding-left:18px;color:#4a635b;font-size:13px;line-height:1.7">'+s.points.map(p=>'<li>'+p+'</li>').join('')+'</ul></div>').join('');quizState={course:i,q:0,score:0};renderQuiz();modal.classList.add('open')}
+let quizState={course:0,q:0,score:0};
+function renderQuiz(){let c=courses[quizState.course];let q=c.quiz[quizState.q];quizProgress.textContent='（第 '+(quizState.q+1)+' / '+c.quiz.length+' 题，已答对 '+quizState.score+' 题）';if(quizState.q>=c.quiz.length){let total=c.quiz.length;let s=quizState.score;let msg=s===total?'🎉 全部答对，太厉害了！':s>=total*0.6?'👍 不错哦，继续加油！':'💪 没关系，再看一遍课程知识吧！';quizArea.innerHTML='<div style="text-align:center;padding:18px;background:#eef5f0;border-radius:14px"><p style="font-size:18px;font-weight:800;margin:0 0 6px">得分：'+s+' / '+total+'</p><p style="margin:0 0 14px;color:var(--muted);font-size:14px">'+msg+'</p><button onclick="restartQuiz()" style="border:0;border-radius:999px;padding:10px 22px;background:var(--orange);color:#fff;font-weight:800;cursor:pointer">重新挑战</button></div>';return;}
+quizArea.innerHTML='<p style="font-weight:800;margin:0 0 10px;font-size:15px">'+q.q+'</p><div id="quizOpts">'+q.options.map((o,i)=>'<button data-i="'+i+'" style="display:block;width:100%;text-align:left;margin:6px 0;padding:11px 14px;border:1px solid #d5e0da;border-radius:12px;background:#fff;cursor:pointer;font-size:14px;color:var(--green)">'+String.fromCharCode(65+i)+'. '+o+'</button>').join('')+'</div><div id="quizFeedback" style="display:none;margin-top:10px;padding:12px 14px;border-radius:12px;font-size:13px;line-height:1.6"></div><button id="quizNext" style="display:none;margin-top:10px;border:0;border-radius:999px;padding:10px 22px;background:var(--mid);color:#fff;font-weight:800;cursor:pointer">下一题 →</button>';
+document.querySelectorAll('#quizOpts button').forEach(b=>b.onclick=()=>selectAnswer(parseInt(b.dataset.i)));}
+function selectAnswer(i){let c=courses[quizState.course];let q=c.quiz[quizState.q];let btns=document.querySelectorAll('#quizOpts button');btns.forEach(b=>b.style.cursor='default');let correct=q.answer;btns.forEach((b,idx)=>{if(idx===correct){b.style.background='#e3f5eb';b.style.borderColor='#3a9d6e';b.style.color='#1d6b47'}else if(idx===i&&i!==correct){b.style.background='#fde8e3';b.style.borderColor='#d9634a';b.style.color='#a33a22'}});
+if(i===correct)quizState.score++;
+let fb=document.getElementById('quizFeedback');fb.style.display='block';fb.style.background=i===correct?'#e3f5eb':'#fde8e3';fb.style.color=i===correct?'#1d6b47':'#a33a22';fb.innerHTML=(i===correct?'✅ 答对了！':'❌ 答错了。正确答案是 '+String.fromCharCode(65+correct)+'。')+'<br>'+q.explain;
+document.getElementById('quizNext').style.display='inline-block';
+document.getElementById('quizNext').textContent=quizState.q>=c.quiz.length-1?'查看结果 →':'下一题 →';
+document.getElementById('quizNext').onclick=()=>{quizState.q++;renderQuiz()};}
+function restartQuiz(){quizState.q=0;quizState.score=0;renderQuiz();}function closeModal(){modal.classList.remove('open')}modal.onclick=e=>{if(e.target===modal)closeModal()};
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.tabview').forEach(x=>x.classList.add('hidden'));document.querySelector('#'+b.dataset.tab).classList.remove('hidden')});
 generate.onclick=()=>{waiting.classList.add('hidden');lessonResult.classList.add('show')};publish.onclick=()=>{studentWait.classList.add('hidden');studentTask.classList.remove('hidden');document.querySelector('[data-tab=student]').click()};let h=0;hint.onclick=()=>{let lines=['<div class="bubble me">3.5元和4.2元。</div>','<div class="bubble">很好！求“一共”应该用加法。把小数点对齐，你愿意试着算一下吗？</div>','<div class="bubble me">是7.7元！</div>','<div class="bubble">答对了，学习结果已同步给李老师！</div>'];if(h<lines.length){chatMore.innerHTML+=lines[h++];if(h===lines.length)hint.textContent='已完成并同步'}};
 (function(){var chat=document.querySelector('#aiChat'),inp=document.querySelector('#aiInput'),btn=document.querySelector('#aiSend');if(!chat||!inp||!btn)return;var hist=[];function bubble(role,text){var d=document.createElement('div');d.className='bubble'+(role==='user'?' me':'');d.style.whiteSpace='pre-wrap';d.textContent=text;chat.appendChild(d);chat.scrollTop=chat.scrollHeight;}function send(){var q=inp.value.trim();if(!q||btn.disabled)return;inp.value='';bubble('user',q);hist.push({role:'user',content:q});btn.disabled=true;btn.textContent='思考中…';fetch('https://qingye-edu.pages.dev/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:hist.slice(-8)})}).then(function(r){return r.json().then(function(d){return {ok:r.ok,d:d};});}).then(function(res){if(!res.ok)throw new Error(res.d.error||'AI服务暂时不可用');var c=(res.d.content||'').trim();bubble('assistant',c);hist.push({role:'assistant',content:c});}).catch(function(e){bubble('assistant','⚠️ '+e.message);}).then(function(){btn.disabled=false;btn.textContent='发送';});}btn.onclick=send;inp.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}});})();</script></body></html>

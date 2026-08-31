@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#173b32">
+<title>学生端 · 青野智教</title>
+<style>
+:root{--green:#173b32;--mid:#1f785e;--orange:#e37342;--paper:#f7f7f1;--muted:#647a73}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);background-image:linear-gradient(rgba(247,247,241,0.88),rgba(247,247,241,0.88)),url("bg.jpg");background-size:cover;background-position:center;background-attachment:fixed;min-height:100vh;color:var(--green);font-family:"Microsoft YaHei","PingFang SC",sans-serif}
+a{text-decoration:none;color:inherit}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer;min-height:44px;border:0;border-radius:12px;font-weight:800}
+.wrap{max-width:1100px;margin:auto;padding:0 20px}
+.nav{height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(247,247,241,0.9);backdrop-filter:blur(8px);border-bottom:1px solid rgba(23,59,50,0.08);position:sticky;top:0;z-index:10}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:17px}
+.logo{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--mid);color:#fff;font-size:18px}
+.role-badge{padding:6px 14px;border-radius:999px;font-size:13px;font-weight:800}
+.role-teacher{background:#e8f3ec;color:var(--mid)}
+.role-student{background:#fff0e8;color:var(--orange)}
+.back-link{font-size:14px;color:var(--muted);padding:8px 14px;border-radius:8px;transition:background .2s}
+.back-link:hover{background:#e8ede9}
+.page{padding:32px 0 60px}
+.page-title{font-size:28px;margin:0 0 6px}
+.page-sub{color:var(--muted);font-size:14px;margin:0 0 24px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.card{background:#fff;border:1px solid #dfe7e2;border-radius:20px;padding:22px;box-shadow:0 8px 24px rgba(31,74,61,0.06)}
+.card h3{margin:0 0 16px;font-size:18px;display:flex;align-items:center;gap:8px}
+.field{display:block;margin:14px 0;font-size:13px;font-weight:800}
+.field input,.field textarea,.field select{display:block;width:100%;margin-top:7px;padding:12px;border:1px solid #d9e2dc;border-radius:10px;font-size:14px;background:#fff}
+.field textarea{min-height:80px;resize:vertical}
+.btn-primary{background:var(--orange);color:#fff;padding:13px 22px;width:100%;font-size:15px}
+.btn-green{background:var(--green);color:#fff;padding:10px 18px;font-size:14px}
+.btn-outline{background:#fff;border:1px solid #ccd9d3;color:var(--green);padding:10px 18px;font-size:14px}
+.btn-sm{padding:7px 14px;font-size:12px;min-height:36px;border-radius:8px}
+.course-item{border:1px solid #e2e9e5;border-radius:14px;padding:14px;margin-bottom:12px;transition:all .2s}
+.course-item:hover{border-color:var(--mid);box-shadow:0 4px 12px rgba(31,74,61,0.08)}
+.course-item h4{margin:0 0 6px;font-size:15px}
+.course-item .meta{font-size:12px;color:var(--muted);margin-bottom:8px}
+.course-item .actions{display:flex;gap:8px;margin-top:10px}
+.tag{display:inline-block;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:800;margin-right:6px}
+.tag-published{background:#e3f5eb;color:#1d6b47}
+.tag-draft{background:#f0f0f0;color:#888}
+.progress-bar{height:8px;background:#e8ede9;border-radius:4px;overflow:hidden;margin-top:8px}
+.progress-fill{height:100%;background:var(--mid);border-radius:4px;transition:width .4s}
+.progress-text{font-size:12px;color:var(--muted);margin-top:4px}
+.empty{text-align:center;padding:40px 20px;color:var(--muted);font-size:14px}
+.empty .icon{font-size:40px;margin-bottom:10px}
+.lesson-preview{background:#f7f9f6;border-radius:12px;padding:16px;margin-top:14px;font-size:13px;line-height:1.8;max-height:300px;overflow-y:auto}
+.lesson-preview h4{margin:10px 0 4px;font-size:14px;color:var(--mid)}
+.lesson-preview ul{margin:4px 0;padding-left:18px}
+.step{display:flex;gap:10px;margin:8px 0;padding:10px;border:1px solid #e2e9e5;border-radius:10px;font-size:13px;line-height:1.6}
+.num{display:grid;place-items:center;flex:0 0 28px;height:28px;border-radius:8px;background:#e5f2ec;font-weight:900;font-size:12px}
+.chat-box{background:#f7f9f6;border-radius:14px;padding:16px;min-height:300px;max-height:420px;overflow-y:auto;margin-bottom:12px}
+.bubble{width:fit-content;max-width:82%;margin:10px 0;padding:11px 14px;border-radius:14px;line-height:1.6;font-size:14px}
+.bubble.teacher{margin-left:auto;background:#fff0e8}
+.bubble.student{background:#eff5f2}
+.bubble.system{margin:0 auto;background:#e8ede9;color:var(--muted);font-size:12px;text-align:center;max-width:90%}
+.chat-input{display:flex;gap:8px}
+.chat-input input{flex:1;padding:12px;border:1px solid #d9e2dc;border-radius:10px;font-size:14px}
+.chat-input button{padding:12px 20px;background:var(--green);color:#fff;border-radius:10px;font-size:14px;min-height:44px}
+.student-card{display:flex;align-items:center;justify-content:space-between;padding:12px;border:1px solid #e2e9e5;border-radius:12px;margin-bottom:8px}
+.student-card .name{font-weight:800;font-size:14px}
+.student-card .status{font-size:12px;color:var(--muted)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+.dot-online{background:#3a9d6e}
+.dot-offline{background:#ccc}
+.sync-indicator{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--mid);padding:4px 10px;background:#e8f3ec;border-radius:999px}
+.sync-indicator .pulse{width:8px;height:8px;border-radius:50%;background:var(--mid);animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.toast{position:fixed;top:80px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;padding:12px 24px;border-radius:12px;font-size:14px;font-weight:800;z-index:100;box-shadow:0 8px 24px rgba(0,0,0,0.2);animation:slideDown .3s}
+@keyframes slideDown{from{opacity:0;transform:translateX(-50%) translateY(-20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+@media(max-width:760px){
+  html,body{overflow-x:hidden}
+  .wrap{padding:0 14px}
+  .grid2{grid-template-columns:1fr}
+  .page{padding:20px 0 40px}
+  .page-title{font-size:22px}
+  .card{padding:16px;border-radius:16px}
+  .nav{height:56px}
+  .brand{font-size:14px}
+  .logo{width:32px;height:32px;font-size:15px}
+}
+
+.study-view{display:none}
+.study-view.active{display:block}
+.course-list-view .course-item{cursor:pointer}
+.back-btn{margin-bottom:16px}
+.lesson-content{background:#f7f9f6;border-radius:14px;padding:18px;margin-bottom:16px;font-size:14px;line-height:1.9}
+.lesson-content h4{margin:14px 0 6px;font-size:15px;color:var(--mid)}
+.lesson-content ul{margin:6px 0;padding-left:20px}
+.complete-btn{background:var(--mid);color:#fff;padding:14px;width:100%;font-size:15px;margin-top:16px}
+.complete-btn.done{background:#ccc;cursor:default}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="wrap" style="display:flex;align-items:center;justify-content:space-between;width:100%">
+<div class="brand"><div class="logo">🌿</div>青野智教<span class="role-badge role-student">学生端</span></div>
+<a href="index.html" class="back-link">← 返回首页</a>
+</div></nav>
+<main class="wrap page">
+<div id="loginView">
+<h1 class="page-title">同学你好 👋</h1>
+<p class="page-sub">输入你的名字，开始学习吧</p>
+<div class="card" style="max-width:400px">
+<label class="field">你的名字<input id="studentName" placeholder="例如：小明"></label>
+<button class="btn-primary" id="loginBtn">进入学习</button>
+</div>
+</div>
+<div id="mainView" style="display:none">
+<div class="course-list-view" id="listView">
+<h1 class="page-title">我的课程</h1>
+<p class="page-sub"><span class="sync-indicator"><span class="pulse"></span>教师端发布的课程会自动出现在这里</span></p>
+<div id="courseList"></div>
+<div class="card" style="margin-top:20px">
+<h3>💬 AI 学习辅导</h3>
+<div class="chat-box" id="chatBox"><div class="bubble system">有什么不懂的，随时问我吧！我会一步步引导你思考。</div></div>
+<div class="chat-input"><input id="chatInput" placeholder="输入你的问题…"><button id="chatSend">发送</button></div>
+</div>
+</div>
+<div class="study-view" id="studyView">
+<button class="btn-sm btn-outline back-btn" id="backBtn">← 返回课程列表</button>
+<h1 class="page-title" id="studyTitle"></h1>
+<p class="page-sub" id="studyMeta"></p>
+<div class="lesson-content" id="lessonContent"></div>
+<button class="complete-btn" id="completeBtn">✅ 我已学完这节课</button>
+</div>
+</div>
+</main>
+<script>
+var STORE_COURSES='qingye_courses',STORE_PROGRESS='qingye_progress',STORE_STUDENTS='qingye_students';
+var myName='';
+function getCourses(){try{return JSON.parse(localStorage.getItem(STORE_COURSES)||'[]')}catch(e){return[]}}
+function getProgress(){try{return JSON.parse(localStorage.getItem(STORE_PROGRESS)||'{}')}catch(e){return{}}}
+function saveProgress(p){localStorage.setItem(STORE_PROGRESS,JSON.stringify(p))}
+function getStudents(){try{return JSON.parse(localStorage.getItem(STORE_STUDENTS)||'{}')}catch(e){return{}}}
+function saveStudents(s){localStorage.setItem(STORE_STUDENTS,JSON.stringify(s))}
+function toast(msg){var t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);setTimeout(function(){t.remove()},2500)}
+function setOnline(online){var s=getStudents();s[myName]={online:online,lastSeen:Date.now()};saveStudents(s)}
+document.getElementById('loginBtn').onclick=function(){
+  var name=document.getElementById('studentName').value.trim();
+  if(!name){toast('请输入你的名字');return}
+  myName=name;setOnline(true);
+  document.getElementById('loginView').style.display='none';
+  document.getElementById('mainView').style.display='block';
+  renderCourses();toast('欢迎你，'+name+'！');
+};
+window.addEventListener('beforeunload',function(){setOnline(false)});
+function renderCourses(){
+  var courses=getCourses();var progress=getProgress();var myProgress=progress[myName]||{};
+  var list=document.getElementById('courseList');
+  if(!courses.length){list.innerHTML='<div class="empty"><div class="icon">📭</div>老师还没有发布课程<br>稍等一下，发布后会自动出现</div>';return}
+  list.innerHTML=courses.map(function(c){
+    var done=myProgress[c.id]&&myProgress[c.id].completed;
+    return'<div class="course-item" onclick="openCourse(\''+c.id+'\')"><h4>'+(done?'✅ ':'')+c.title+'</h4><div class="meta"><span class="tag '+(done?'tag-published':'tag-draft')+'">'+(done?'已学完':'待学习')+'</span>'+c.grade+' · '+new Date(c.createdAt).toLocaleString('zh-CN',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'})+'</div><p style="font-size:13px;color:var(--muted);margin:6px 0 0">乡土素材：'+c.context+'</p></div>';
+  }).join('');
+}
+var currentCourseId=null;
+function openCourse(id){
+  var c=getCourses().find(function(x){return x.id===id});if(!c)return;
+  currentCourseId=id;
+  document.getElementById('listView').style.display='none';
+  document.getElementById('studyView').classList.add('active');
+  document.getElementById('studyTitle').textContent=c.title;
+  document.getElementById('studyMeta').textContent=c.grade+' · 乡土素材：'+c.context;
+  var h='<h4>🎯 学习目标</h4><ul>'+c.objectives.map(function(o){return'<li>'+o+'</li>'}).join('')+'</ul>';
+  h+='<h4>📖 学习内容</h4>'+c.steps.map(function(s,i){return'<div class="step"><span class="num">'+(i+1)+'</span>'+s+'</div>'}).join('');
+  h+='<h4>✏️ 课堂练习</h4><p>'+c.practice.replace(/\\n/g,'<br>')+'</p>';
+  document.getElementById('lessonContent').innerHTML=h;
+  var progress=getProgress();var myP=progress[myName]||{};
+  var btn=document.getElementById('completeBtn');
+  if(myP[id]&&myP[id].completed){btn.textContent='✅ 已完成';btn.classList.add('done');btn.disabled=true}
+  else{btn.textContent='✅ 我已学完这节课';btn.classList.remove('done');btn.disabled=false}
+}
+document.getElementById('backBtn').onclick=function(){
+  document.getElementById('studyView').classList.remove('active');
+  document.getElementById('listView').style.display='block';
+  renderCourses();
+};
+document.getElementById('completeBtn').onclick=function(){
+  if(!currentCourseId)return;
+  var progress=getProgress();if(!progress[myName])progress[myName]={};
+  progress[myName][currentCourseId]={completed:true,completedAt:Date.now()};
+  saveProgress(progress);
+  var btn=document.getElementById('completeBtn');btn.textContent='✅ 已完成';btn.classList.add('done');btn.disabled=true;
+  toast('太棒了！学习进度已同步给老师');
+};
+// AI Chat
+var chatHist=[];
+function addBubble(text,role){
+  var box=document.getElementById('chatBox');
+  var d=document.createElement('div');d.className='bubble '+role;d.textContent=text;box.appendChild(d);
+  box.scrollTop=box.scrollHeight;
+}
+document.getElementById('chatSend').onclick=sendChat;
+document.getElementById('chatInput').addEventListener('keydown',function(e){if(e.key==='Enter')sendChat()});
+function sendChat(){
+  var inp=document.getElementById('chatInput');var q=inp.value.trim();if(!q)return;
+  addBubble(q,'student');chatHist.push({role:'user',content:q});inp.value='';
+  addBubble('思考中…','teacher');
+  var thinking=document.querySelector('#chatBox .bubble:last-child');
+  fetch('api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:chatHist.slice(-8)})})
+  .then(function(r){return r.json()}).then(function(d){
+    thinking.textContent=d.content||'抱歉，我暂时无法回答。';
+    chatHist.push({role:'assistant',content:d.content||''});
+  }).catch(function(){thinking.textContent='⚠️ AI服务暂时不可用，请稍后再试。'});
+}
+window.addEventListener('storage',function(e){
+  if(e.key===STORE_COURSES){renderCourses();toast('📢 老师发布了新课程！')}
+});
+setInterval(function(){if(myName){setOnline(true);renderCourses()}},5000);
+</script>
+</body>
+</html>

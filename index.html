@@ -45,27 +45,35 @@ body{background:#0c231d;color:#fff;font-family:"Microsoft YaHei","PingFang SC",s
   <div class="slogan">让每一次支教，都能被延续</div>
   <button id="enterBtn">进入网站 →</button>
 </div>
-<script>
-var video=document.getElementById('introVideo');
+<script>var video=document.getElementById('introVideo');
 var overlay=document.getElementById('enterOverlay');
 var skipBtn=document.getElementById('skipBtn');
 var soundBtn=document.getElementById('soundBtn');
 var loading=document.getElementById('loading');
-var muted=true;
+var started=false, soundOn=false;
+function tryPlay(){
+  if(started)return;
+  var p=video.play();
+  if(p&&p.catch){p.then(function(){started=true;loading.style.display='none';skipBtn.style.display='block';soundBtn.style.display='block'}).catch(function(){})}
+  else{started=true;loading.style.display='none';skipBtn.style.display='block';soundBtn.style.display='block'}
+}
 video.src='intro.mp4';
 video.load();
-video.addEventListener('canplay',function(){loading.style.display='none';skipBtn.style.display='block';soundBtn.style.display='block';video.play().catch(function(){loading.style.display='none';skipBtn.style.display='block';soundBtn.style.display='block'})});
+video.muted=true;
+video.addEventListener('loadeddata',tryPlay);
+video.addEventListener('canplay',tryPlay);
+document.addEventListener('click',function(){if(!started)tryPlay()},{once:true});
+document.addEventListener('touchstart',function(){if(!started)tryPlay()},{once:true});
 video.addEventListener('ended',function(){showEnter()});
 function showEnter(){overlay.classList.add('show');skipBtn.style.display='none';soundBtn.style.display='none'}
 skipBtn.onclick=function(){showEnter()};
 soundBtn.onclick=function(){
-  muted=!muted;
-  video.muted=muted;
+  soundOn=!soundOn;
+  video.muted=!soundOn;
   video.volume=1;
-  soundBtn.textContent=muted?'🔇':'🔊';
-  if(!muted&&video.paused)video.play();
+  soundBtn.textContent=soundOn?'🔊':'🔇';
+  if(soundOn&&video.paused)tryPlay();
 };
-document.getElementById('enterBtn').onclick=function(){window.location.href='home.html'};
-</script>
+document.getElementById('enterBtn').onclick=function(){window.location.href='home.html'};</script>
 </body>
 </html>

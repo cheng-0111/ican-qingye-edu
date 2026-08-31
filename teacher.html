@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#173b32">
+<title>教师端 · 青野智教</title>
+<style>
+:root{--green:#173b32;--mid:#1f785e;--orange:#e37342;--paper:#f7f7f1;--muted:#647a73}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);background-image:linear-gradient(rgba(247,247,241,0.88),rgba(247,247,241,0.88)),url("bg.jpg");background-size:cover;background-position:center;background-attachment:fixed;min-height:100vh;color:var(--green);font-family:"Microsoft YaHei","PingFang SC",sans-serif}
+a{text-decoration:none;color:inherit}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer;min-height:44px;border:0;border-radius:12px;font-weight:800}
+.wrap{max-width:1100px;margin:auto;padding:0 20px}
+.nav{height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(247,247,241,0.9);backdrop-filter:blur(8px);border-bottom:1px solid rgba(23,59,50,0.08);position:sticky;top:0;z-index:10}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:17px}
+.logo{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--mid);color:#fff;font-size:18px}
+.role-badge{padding:6px 14px;border-radius:999px;font-size:13px;font-weight:800}
+.role-teacher{background:#e8f3ec;color:var(--mid)}
+.role-student{background:#fff0e8;color:var(--orange)}
+.back-link{font-size:14px;color:var(--muted);padding:8px 14px;border-radius:8px;transition:background .2s}
+.back-link:hover{background:#e8ede9}
+.page{padding:32px 0 60px}
+.page-title{font-size:28px;margin:0 0 6px}
+.page-sub{color:var(--muted);font-size:14px;margin:0 0 24px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.card{background:#fff;border:1px solid #dfe7e2;border-radius:20px;padding:22px;box-shadow:0 8px 24px rgba(31,74,61,0.06)}
+.card h3{margin:0 0 16px;font-size:18px;display:flex;align-items:center;gap:8px}
+.field{display:block;margin:14px 0;font-size:13px;font-weight:800}
+.field input,.field textarea,.field select{display:block;width:100%;margin-top:7px;padding:12px;border:1px solid #d9e2dc;border-radius:10px;font-size:14px;background:#fff}
+.field textarea{min-height:80px;resize:vertical}
+.btn-primary{background:var(--orange);color:#fff;padding:13px 22px;width:100%;font-size:15px}
+.btn-green{background:var(--green);color:#fff;padding:10px 18px;font-size:14px}
+.btn-outline{background:#fff;border:1px solid #ccd9d3;color:var(--green);padding:10px 18px;font-size:14px}
+.btn-sm{padding:7px 14px;font-size:12px;min-height:36px;border-radius:8px}
+.course-item{border:1px solid #e2e9e5;border-radius:14px;padding:14px;margin-bottom:12px;transition:all .2s}
+.course-item:hover{border-color:var(--mid);box-shadow:0 4px 12px rgba(31,74,61,0.08)}
+.course-item h4{margin:0 0 6px;font-size:15px}
+.course-item .meta{font-size:12px;color:var(--muted);margin-bottom:8px}
+.course-item .actions{display:flex;gap:8px;margin-top:10px}
+.tag{display:inline-block;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:800;margin-right:6px}
+.tag-published{background:#e3f5eb;color:#1d6b47}
+.tag-draft{background:#f0f0f0;color:#888}
+.progress-bar{height:8px;background:#e8ede9;border-radius:4px;overflow:hidden;margin-top:8px}
+.progress-fill{height:100%;background:var(--mid);border-radius:4px;transition:width .4s}
+.progress-text{font-size:12px;color:var(--muted);margin-top:4px}
+.empty{text-align:center;padding:40px 20px;color:var(--muted);font-size:14px}
+.empty .icon{font-size:40px;margin-bottom:10px}
+.lesson-preview{background:#f7f9f6;border-radius:12px;padding:16px;margin-top:14px;font-size:13px;line-height:1.8;max-height:300px;overflow-y:auto}
+.lesson-preview h4{margin:10px 0 4px;font-size:14px;color:var(--mid)}
+.lesson-preview ul{margin:4px 0;padding-left:18px}
+.step{display:flex;gap:10px;margin:8px 0;padding:10px;border:1px solid #e2e9e5;border-radius:10px;font-size:13px;line-height:1.6}
+.num{display:grid;place-items:center;flex:0 0 28px;height:28px;border-radius:8px;background:#e5f2ec;font-weight:900;font-size:12px}
+.chat-box{background:#f7f9f6;border-radius:14px;padding:16px;min-height:300px;max-height:420px;overflow-y:auto;margin-bottom:12px}
+.bubble{width:fit-content;max-width:82%;margin:10px 0;padding:11px 14px;border-radius:14px;line-height:1.6;font-size:14px}
+.bubble.teacher{margin-left:auto;background:#fff0e8}
+.bubble.student{background:#eff5f2}
+.bubble.system{margin:0 auto;background:#e8ede9;color:var(--muted);font-size:12px;text-align:center;max-width:90%}
+.chat-input{display:flex;gap:8px}
+.chat-input input{flex:1;padding:12px;border:1px solid #d9e2dc;border-radius:10px;font-size:14px}
+.chat-input button{padding:12px 20px;background:var(--green);color:#fff;border-radius:10px;font-size:14px;min-height:44px}
+.student-card{display:flex;align-items:center;justify-content:space-between;padding:12px;border:1px solid #e2e9e5;border-radius:12px;margin-bottom:8px}
+.student-card .name{font-weight:800;font-size:14px}
+.student-card .status{font-size:12px;color:var(--muted)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+.dot-online{background:#3a9d6e}
+.dot-offline{background:#ccc}
+.sync-indicator{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--mid);padding:4px 10px;background:#e8f3ec;border-radius:999px}
+.sync-indicator .pulse{width:8px;height:8px;border-radius:50%;background:var(--mid);animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.toast{position:fixed;top:80px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;padding:12px 24px;border-radius:12px;font-size:14px;font-weight:800;z-index:100;box-shadow:0 8px 24px rgba(0,0,0,0.2);animation:slideDown .3s}
+@keyframes slideDown{from{opacity:0;transform:translateX(-50%) translateY(-20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+@media(max-width:760px){
+  html,body{overflow-x:hidden}
+  .wrap{padding:0 14px}
+  .grid2{grid-template-columns:1fr}
+  .page{padding:20px 0 40px}
+  .page-title{font-size:22px}
+  .card{padding:16px;border-radius:16px}
+  .nav{height:56px}
+  .brand{font-size:14px}
+  .logo{width:32px;height:32px;font-size:15px}
+}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="wrap" style="display:flex;align-items:center;justify-content:space-between;width:100%">
+<div class="brand"><div class="logo">🌿</div>青野智教<span class="role-badge role-teacher">教师端</span></div>
+<a href="index.html" class="back-link">← 返回首页</a>
+</div></nav>
+<main class="wrap page">
+<h1 class="page-title">教师工作台</h1>
+<p class="page-sub"><span class="sync-indicator"><span class="pulse"></span>与学生端实时同步中</span></p>
+<div class="grid2">
+<div class="card">
+<h3>📝 创建新课程</h3>
+<label class="field">课程主题<input id="topic" placeholder="例如：小数的加减法" value="小数的加减法"></label>
+<label class="field">当地生活素材<input id="context" placeholder="例如：村口集市、水稻收成" value="村口集市、水稻收成"></label>
+<label class="field">年级<select id="grade"><option>三年级</option><option selected>四年级</option><option>五年级</option><option>六年级</option></select></label>
+<button class="btn-primary" id="genBtn">生成乡土化教案</button>
+<div id="lessonPreview" class="lesson-preview" style="display:none"></div>
+<button class="btn-green" id="publishBtn" style="display:none;margin-top:12px;width:100%">📢 发布到学生端</button>
+</div>
+<div class="card">
+<h3>📚 已发布课程</h3>
+<div id="courseList"></div>
+</div>
+</div>
+<div class="card" style="margin-top:20px">
+<h3>👦 学生学习进度</h3>
+<div id="studentList"></div>
+</div>
+</main>
+<script>
+var STORE_COURSES='qingye_courses',STORE_PROGRESS='qingye_progress',STORE_STUDENTS='qingye_students';
+function getCourses(){try{return JSON.parse(localStorage.getItem(STORE_COURSES)||'[]')}catch(e){return[]}}
+function saveCourses(c){localStorage.setItem(STORE_COURSES,JSON.stringify(c))}
+function getProgress(){try{return JSON.parse(localStorage.getItem(STORE_PROGRESS)||'{}')}catch(e){return{}}}
+function getStudents(){try{return JSON.parse(localStorage.getItem(STORE_STUDENTS)||'{}')}catch(e){return{}}}
+function toast(msg){var t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);setTimeout(function(){t.remove()},2500)}
+function detectSubject(t){if(/小数|分数|乘法|除法|加减|面积|周长|几何|统计|数学|运算|数的/.test(t))return'math';if(/古诗|课文|阅读|作文|写作|生字|词语|语文|诗歌|故事/.test(t))return'chinese';if(/植物|动物|水|天气|土壤|光|电|科学|自然|生态|昆虫|人体/.test(t))return'science';return'general'}
+function genLesson(topic,context,grade){
+  var subj=detectSubject(topic);var L=context.split(/[、,，\s]+/).filter(Boolean);if(!L.length)L=['村口集市','水稻田'];var l0=L[0],l1=L[1]||L[0],l2=L[2]||L[0];
+  var obj,steps,practice;
+  if(subj==='math'){obj=['结合'+l0+'的真实情境，理解'+topic+'的基本概念与算理。','能运用'+topic+'解决'+l1+'中的实际问题。','体会数学与乡村生活的紧密联系。'];steps=['情境导入：展示'+l0+'场景，引导学生提出与'+topic+'相关的问题。','自主探究：分组利用'+l1+'的实物或数据，尝试解决问题。','交流汇报：各组展示方法，教师归纳'+topic+'的核心规律。','巩固应用：结合'+l2+'设计分层练习。','课堂小结：学生回顾关键步骤，联系生活举例。'];practice='基础：根据'+l0+'数据完成3道计算。\n提高：设计涉及'+topic+'的'+l1+'方案。\n拓展：调查家中相关实例。'}
+  else if(subj==='chinese'){obj=['通过'+l0+'的生活情境，理解'+topic+'的内容与情感。','能模仿写法描写'+l1+'。','感受乡村生活中的语文之美。'];steps=['情境导入：展示'+l0+'画面，学生用词语描述。','初读感知：自由朗读，梳理主要内容。','品读感悟：抓住关键语句，结合'+l1+'体验理解情感。','写法迁移：学习表达方法，仿写'+l2+'片段。','展示评价：小组朗读，师生点评。'];practice='摘抄：积累描写'+l0+'的优美词句。\n仿写：用学到的写法写一段关于'+l1+'的话。\n背诵：背诵重点段落。'}
+  else if(subj==='science'){obj=['通过观察'+l0+'的自然现象，了解'+topic+'的基本原理。','能设计简单实验验证猜想。','培养科学探究精神，关注乡村生态。'];steps=['提出问题：观察'+l0+'，提出与'+topic+'相关的问题。','猜想假设：分组讨论，做出合理猜想。','实验探究：利用'+l1+'材料设计实验。','分析结论：记录数据，归纳科学规律。','拓展应用：讨论'+topic+'在农业生产中的应用。'];practice='观察记录：连续3天观察'+l0+'的变化。\n实验报告：完成探究实验结论。\n思考讨论：'+topic+'对生产生活的影响。'}
+  else{obj=['结合'+l0+'了解'+topic+'的基本知识。','能将'+topic+'与'+l1+'实际生活联系。','培养主动探究习惯。'];steps=['情境导入：从'+l0+'引出'+topic+'。','新知探究：自主阅读，初步了解。','合作交流：讨论与生活的联系。','实践应用：完成相关任务。','总结提升：梳理要点。'];practice='基础：整理核心知识点。\n应用：举例说明在'+l0+'中的体现。\n拓展：调查在'+l1+'中的应用。'}
+  return{title:'在'+l0+'学'+topic,grade:grade,topic:topic,context:context,objectives:obj,steps:steps,practice:practice,subject:subj};
+}
+var currentLesson=null;
+document.getElementById('genBtn').onclick=function(){
+  var topic=document.getElementById('topic').value.trim();
+  var context=document.getElementById('context').value.trim();
+  var grade=document.getElementById('grade').value;
+  if(!topic){toast('请输入课程主题');return}
+  currentLesson=genLesson(topic,context,grade);
+  var p=document.getElementById('lessonPreview');p.style.display='block';
+  var h='<h4>📌 '+currentLesson.title+'</h4>';
+  h+='<h4>🎯 教学目标</h4><ul>'+currentLesson.objectives.map(function(o){return'<li>'+o+'</li>'}).join('')+'</ul>';
+  h+='<h4>📝 教学步骤</h4>'+currentLesson.steps.map(function(s,i){return'<div class="step"><span class="num">'+(i+1)+'</span>'+s+'</div>'}).join('');
+  h+='<h4>✏️ 课堂练习</h4><p>'+currentLesson.practice.replace(/\\n/g,'<br>')+'</p>';
+  p.innerHTML=h;
+  document.getElementById('publishBtn').style.display='block';
+  toast('教案已生成，请审核后发布');
+};
+document.getElementById('publishBtn').onclick=function(){
+  if(!currentLesson)return;
+  var courses=getCourses();
+  var course={id:'c_'+Date.now(),...currentLesson,createdAt:Date.now(),status:'published'};
+  courses.unshift(course);saveCourses(courses);
+  currentLesson=null;
+  document.getElementById('lessonPreview').style.display='none';
+  document.getElementById('publishBtn').style.display='none';
+  document.getElementById('topic').value='';document.getElementById('context').value='';
+  renderCourses();toast('✅ 已发布到学生端');
+};
+function renderCourses(){
+  var courses=getCourses();var list=document.getElementById('courseList');
+  if(!courses.length){list.innerHTML='<div class="empty"><div class="icon">📭</div>还没有发布课程<br>在左侧创建并发布第一节课吧</div>';return}
+  list.innerHTML=courses.map(function(c){
+    return'<div class="course-item"><h4>'+c.title+'</h4><div class="meta"><span class="tag tag-published">已发布</span>'+c.grade+' · '+new Date(c.createdAt).toLocaleString('zh-CN',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'})+'</div><div class="actions"><button class="btn-sm btn-outline" onclick="viewCourse(\''+c.id+'\')">查看教案</button><button class="btn-sm btn-outline" style="color:#c44" onclick="deleteCourse(\''+c.id+'\')">删除</button></div></div>';
+  }).join('');
+}
+function viewCourse(id){
+  var c=getCourses().find(function(x){return x.id===id});if(!c)return;
+  var h='<h4>📌 '+c.title+'</h4>';
+  h+='<h4>🎯 教学目标</h4><ul>'+c.objectives.map(function(o){return'<li>'+o+'</li>'}).join('')+'</ul>';
+  h+='<h4>📝 教学步骤</h4>'+c.steps.map(function(s,i){return'<div class="step"><span class="num">'+(i+1)+'</span>'+s+'</div>'}).join('');
+  h+='<h4>✏️ 课堂练习</h4><p>'+c.practice.replace(/\\n/g,'<br>')+'</p>';
+  var p=document.getElementById('lessonPreview');p.style.display='block';p.innerHTML=h;
+  document.getElementById('publishBtn').style.display='none';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function deleteCourse(id){
+  if(!confirm('确定删除这门课程？'))return;
+  var courses=getCourses().filter(function(c){return c.id!==id});saveCourses(courses);
+  renderCourses();toast('课程已删除');
+}
+function renderStudents(){
+  var students=getStudents();var progress=getProgress();var courses=getCourses();
+  var list=document.getElementById('studentList');
+  var names=Object.keys(students);
+  if(!names.length){list.innerHTML='<div class="empty"><div class="icon">👦</div>暂无学生登录<br>学生端打开后会自动出现在这里</div>';return}
+  list.innerHTML=names.map(function(name){
+    var s=students[name];var sp=progress[name]||{};var completed=Object.values(sp).filter(function(p){return p.completed}).length;
+    var total=courses.length;var pct=total?Math.round(completed/total*100):0;
+    return'<div class="student-card"><div><div class="name"><span class="dot '+(s.online?'dot-online':'dot-offline')+'"></span>'+name+'</div><div class="status">'+(s.online?'在线学习中':'离线')+' · 已完成 '+completed+'/'+total+' 节课</div></div><div style="width:120px"><div class="progress-bar"><div class="progress-fill" style="width:'+pct+'%"></div></div><div class="progress-text">'+pct+'%</div></div></div>';
+  }).join('');
+}
+window.addEventListener('storage',function(e){
+  if(e.key===STORE_COURSES||e.key===STORE_PROGRESS||e.key===STORE_STUDENTS){renderCourses();renderStudents()}
+});
+setInterval(function(){renderCourses();renderStudents()},3000);
+renderCourses();renderStudents();
+</script>
+</body>
+</html>
